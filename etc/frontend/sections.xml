@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Customer:etc/sections.xsd">
+    <action name="checkout/cart/add">
+        <section name="free-shipping-bar"/>
+    </action>
+    <action name="checkout/cart/delete">
+        <section name="free-shipping-bar"/>
+    </action>
+    <action name="checkout/cart/updatePost">
+        <section name="free-shipping-bar"/>
+    </action>
+    <action name="checkout/cart/updateItemOptions">
+        <section name="free-shipping-bar"/>
+    </action>
+    <action name="checkout/cart/couponPost">
+        <section name="free-shipping-bar"/>
+    </action>
+    <action name="checkout/cart/estimatePost">
+        <section name="free-shipping-bar"/>
+    </action>
+    <action name="checkout/cart/estimateUpdatePost">
+        <section name="free-shipping-bar"/>
+    </action>
+    <action name="checkout/sidebar/removeItem">
+        <section name="free-shipping-bar"/>
+    </action>
+    <action name="checkout/sidebar/updateItemQty">
+        <section name="free-shipping-bar"/>
+    </action>
+    <action name="wishlist/index/cart">
+        <section name="free-shipping-bar"/>
+    </action>
+    <action name="wishlist/index/allcart">
+        <section name="free-shipping-bar"/>
+    </action>
+    <!-- The threshold is per customer group, so it can change the moment the group does. -->
+    <action name="customer/account/loginPost">
+        <section name="free-shipping-bar"/>
+    </action>
+    <action name="customer/account/logout">
+        <section name="free-shipping-bar"/>
+    </action>
+    <action name="customer/account/createPost">
+        <section name="free-shipping-bar"/>
+    </action>
+    <action name="customer/ajax/login">
+        <section name="free-shipping-bar"/>
+    </action>
+</config>

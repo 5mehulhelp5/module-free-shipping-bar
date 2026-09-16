@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="freeshippingbar" translate="label" type="text" sortOrder="659" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Free Shipping Bar</label>
+            <tab>swissup</tab>
+            <resource>Swissup_FreeShippingBar::config</resource>
+
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="placements" translate="label comment" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show On</label>
+                    <source_model>Swissup\FreeShippingBar\Model\Source\Placement</source_model>
+                    <can_be_empty>1</can_be_empty>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="basis" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Measure Progress On</label>
+                    <source_model>Swissup\FreeShippingBar\Model\Source\Basis</source_model>
+                    <comment><![CDATA[Must match how your free shipping actually qualifies, or the bar will promise something checkout does not deliver. A detected threshold brings its own basis and overrides this setting.]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="include_tax" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Include Tax</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Set this the way your shipping method or cart price rule evaluates the cart. Getting it wrong is the single most common cause of "the bar said I qualified but checkout charged me". Ignored when the basis is Grand total, which always includes tax.]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="thresholds" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Thresholds</label>
+                <comment><![CDATA[Amounts are in the website base currency and are shown to the customer converted into the currency they are browsing in.]]></comment>
+
+                <field id="group_overrides" translate="label comment" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Per Customer Group</label>
+                    <frontend_model>Swissup\FreeShippingBar\Block\Adminhtml\Form\Field\GroupThresholds</frontend_model>
+                    <backend_model>Swissup\FreeShippingBar\Model\Config\Backend\GroupThresholds</backend_model>
+                    <comment><![CDATA[Checked first and always wins over auto-detection. Leave empty to rely on auto-detection alone.]]></comment>
+                </field>
+
+                <field id="autodetect" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Auto-detect From Shipping Configuration</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Falls back to the Free Shipping carrier, then to any active carrier with "Free Shipping Amount Threshold" set. Used only for customer groups with no override above.]]></comment>
+                </field>
+
+                <field id="parse_sales_rules" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Auto-detect From Cart Price Rules</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[<strong>Experimental.</strong> Reads coupon-less rules that grant free shipping and understands only a single "Subtotal >= X" condition. Leave off unless you have checked the result against the rule it is meant to mirror.]]></comment>
+                    <depends>
+                        <field id="autodetect">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="appearance" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Appearance</label>
+
+                <field id="message_progress" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Message While In Progress</label>
+                    <comment><![CDATA[Use %1 for the remaining amount, e.g. <em>You are %1 away from free shipping.</em>]]></comment>
+                </field>
+
+                <field id="message_qualified" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Message Once Qualified</label>
+                </field>
+
+                <field id="show_when_qualified" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Keep Showing After Qualifying</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[No hides the bar entirely once the cart qualifies.]]></comment>
+                </field>
+
+                <field id="color_track" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Track Color</label>
+                </field>
+
+                <field id="color_fill" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Fill Color</label>
+                </field>
+
+                <field id="color_success" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Qualified Color</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

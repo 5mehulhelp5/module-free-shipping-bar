@@ -1,0 +1,35 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Swissup\FreeShippingBar\ViewModel\Bar $viewModel
+ */
+$viewModel = $block->getData('view_model');
+$placement = (string) $block->getData('placement');
+
+if (!$viewModel instanceof \Swissup\FreeShippingBar\ViewModel\Bar
+    || !$viewModel->isPlacementEnabled($placement)
+) {
+    return '';
+}
+
+$bar = $viewModel->getBarData();
+
+if ($bar === null) {
+    return '';
+}
+
+$percent = $bar->getPercent();
+?>
+<div class="fsbar<?= $bar->isQualified() ? ' fsbar--qualified' : '' ?> fsbar--<?= $escaper->escapeHtmlAttr($placement) ?>"
+     data-fsbar-source="<?= $escaper->escapeHtmlAttr($bar->getSource()) ?>">
+    <p class="fsbar__message"><?= $escaper->escapeHtml($bar->getMessage()) ?></p>
+    <div class="fsbar__track"
+         role="progressbar"
+         aria-valuemin="0"
+         aria-valuemax="100"
+         aria-valuenow="<?= $escaper->escapeHtmlAttr((string) (int) $percent) ?>"
+         aria-label="<?= $escaper->escapeHtmlAttr($bar->getMessage()) ?>">
+        <span class="fsbar__fill" style="width: <?= $escaper->escapeHtmlAttr((string) $percent) ?>%;"></span>
+    </div>
+</div>

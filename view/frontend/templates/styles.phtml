@@ -1,0 +1,21 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Swissup\FreeShippingBar\ViewModel\Styles $viewModel
+ */
+$viewModel = $block->getData('view_model');
+
+if (!$viewModel instanceof \Swissup\FreeShippingBar\ViewModel\Styles || !$viewModel->isEnabled()) {
+    return '';
+}
+
+$colors = $viewModel->getColors();
+?>
+<style>
+    :root {
+        --fsbar-track: <?= $escaper->escapeHtml($colors['track']) ?>;
+        --fsbar-fill: <?= $escaper->escapeHtml($colors['fill']) ?>;
+        --fsbar-success: <?= $escaper->escapeHtml($colors['success']) ?>;
+    }
+</style>

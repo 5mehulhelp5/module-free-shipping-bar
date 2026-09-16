@@ -1,0 +1,17 @@
+<!--
+/**
+ * Checkout order summary free shipping bar.
+ */
+-->
+<div class="fsbar fsbar--checkout"
+     if="isVisible()"
+     css="{'fsbar--qualified': isQualified()}">
+    <p class="fsbar__message" text="message()"></p>
+    <div class="fsbar__track"
+         role="progressbar"
+         aria-valuemin="0"
+         aria-valuemax="100"
+         attr="{'aria-valuenow': ariaValue(), 'aria-label': message()}">
+        <span class="fsbar__fill" data-bind="style: {width: width()}"></span>
+    </div>
+</div>

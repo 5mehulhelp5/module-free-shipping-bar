@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <freeshippingbar>
+            <general>
+                <enabled>0</enabled>
+                <placements>minicart,cart,checkout</placements>
+                <basis>subtotal_with_discount</basis>
+                <include_tax>0</include_tax>
+            </general>
+            <thresholds>
+                <autodetect>1</autodetect>
+                <parse_sales_rules>0</parse_sales_rules>
+                <group_overrides></group_overrides>
+            </thresholds>
+            <appearance>
+                <show_when_qualified>1</show_when_qualified>
+                <message_progress><![CDATA[You are %1 away from free shipping.]]></message_progress>
+                <message_qualified><![CDATA[Congratulations! You have earned free shipping.]]></message_qualified>
+                <color_track>#e8e8e8</color_track>
+                <color_fill>#1979c3</color_fill>
+                <color_success>#006400</color_success>
+            </appearance>
+        </freeshippingbar>
+    </default>
+</config>

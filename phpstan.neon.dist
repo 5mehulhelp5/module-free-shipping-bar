@@ -1,0 +1,9 @@
+includes:
+    - ../../../../dev/tests/static/testsuite/Magento/Test/Php/_files/phpstan/phpstan.neon
+
+parameters:
+    level: 2
+    paths:
+        - .
+    excludePaths:
+        - Test/*
