@@ -38,9 +38,12 @@ define([
                 return Boolean(data.placements && data.placements[this.placement]);
             }, this);
 
-            this.modifierClass = ko.computed(function () {
-                return 'fsbar--' + this.placement.replace(/_/g, '-');
-            }, this);
+            // Plain flags rather than a computed class string: Magento's attribute binding
+            // renderer wraps an attribute value in braces when it contains a colon and no
+            // closing brace, so an inline ternary in css="" becomes css: {expr} and fails to
+            // parse. An object literal already carries its own braces and is left alone.
+            this.isMinicart = this.placement === 'minicart';
+            this.isAjaxproPopup = this.placement === 'ajaxpro_popup';
 
             this.message = ko.computed(function () {
                 return this.isVisible() ? this.bar().message : '';

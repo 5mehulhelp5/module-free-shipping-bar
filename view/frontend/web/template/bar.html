@@ -1,11 +1,15 @@
 <!--
 /**
  * Free shipping bar — header minicart and Ajax Cart Pro popup.
+ *
+ * Keep every attribute binding below an object literal or a brace-free expression. Magento's
+ * Magento_Ui/js/lib/knockout/template/renderer wraps an attribute value in curly braces when it
+ * contains a colon and no closing brace, so a bare ternary here breaks the whole binding tree.
  */
 -->
 <div class="fsbar"
      if="isVisible()"
-     css="modifierClass() + (isQualified() ? ' fsbar--qualified' : '')"
+     css="{'fsbar--minicart': isMinicart, 'fsbar--ajaxpro-popup': isAjaxproPopup, 'fsbar--qualified': isQualified()}"
      attr="{'data-fsbar-source': bar().source}">
     <p class="fsbar__message" text="message()"></p>
     <div class="fsbar__track"

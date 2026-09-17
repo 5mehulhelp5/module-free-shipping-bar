@@ -120,4 +120,10 @@ The fill transition honours `prefers-reduced-motion`.
 
 ```bash
 php ../../../../vendor/bin/phpunit -c phpunit.xml.dist
+node Test/Js/check-ko-bindings.js
 ```
+
+The second one parses every attribute-syntax binding in the Knockout templates the way Magento's
+template renderer and Knockout do. Magento wraps an attribute value in curly braces when it
+contains a colon and no closing brace, so an inline ternary in `css=""` silently becomes
+`css: {expr}` and breaks every binding on the page at runtime. Keep bindings to object literals.

@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.1
+
+- Fix a Knockout binding error introduced in 1.1.0 that broke every binding on pages rendering
+  the minicart: `Unable to parse bindings ... Unexpected token '+'`. Magento's template renderer
+  wraps an attribute binding value in curly braces when it contains a colon and no closing brace,
+  so the inline ternary added to `css=""` became `css: {expr}`. Replaced with an object literal.
+- Added `Test/Js/check-ko-bindings.js`, which applies the same wrapping rule and parses the
+  result, so an unparseable binding fails before it reaches a storefront.
+
 ## 1.1.0
 
 - New placement: the Ajax Cart Pro "added to cart" popup, covering all four of its popup styles.
