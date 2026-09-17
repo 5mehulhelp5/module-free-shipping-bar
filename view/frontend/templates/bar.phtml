@@ -6,6 +6,7 @@
  */
 $viewModel = $block->getData('view_model');
 $placement = (string) $block->getData('placement');
+$modifier = str_replace('_', '-', $placement);
 
 if (!$viewModel instanceof \Swissup\FreeShippingBar\ViewModel\Bar
     || !$viewModel->isPlacementEnabled($placement)
@@ -21,7 +22,7 @@ if ($bar === null) {
 
 $percent = $bar->getPercent();
 ?>
-<div class="fsbar<?= $bar->isQualified() ? ' fsbar--qualified' : '' ?> fsbar--<?= $escaper->escapeHtmlAttr($placement) ?>"
+<div class="fsbar<?= $bar->isQualified() ? ' fsbar--qualified' : '' ?> fsbar--<?= $escaper->escapeHtmlAttr($modifier) ?>"
      data-fsbar-source="<?= $escaper->escapeHtmlAttr($bar->getSource()) ?>">
     <p class="fsbar__message"><?= $escaper->escapeHtml($bar->getMessage()) ?></p>
     <div class="fsbar__track"

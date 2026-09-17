@@ -1,5 +1,5 @@
 /**
- * Minicart free shipping bar.
+ * Free shipping bar for the header minicart and for the Ajax Cart Pro popup.
  *
  * Everything it renders comes from the free-shipping-bar customer data section, so it follows
  * whatever invalidates that section — including Ajax Cart Pro's add to cart, which goes through
@@ -14,7 +14,10 @@ define([
 
     return Component.extend({
         defaults: {
-            template: 'Swissup_FreeShippingBar/bar'
+            template: 'Swissup_FreeShippingBar/bar',
+            // Overridden from layout for the Ajax Cart Pro popup, which renders its own
+            // component tree and is switched on independently of the header minicart.
+            placement: 'minicart'
         },
 
         /**
@@ -26,7 +29,17 @@ define([
             this.bar = customerData.get('free-shipping-bar');
 
             this.isVisible = ko.computed(function () {
-                return Boolean(this.bar() && this.bar().show);
+                var data = this.bar();
+
+                if (!data || !data.show) {
+                    return false;
+                }
+
+                return Boolean(data.placements && data.placements[this.placement]);
+            }, this);
+
+            this.modifierClass = ko.computed(function () {
+                return 'fsbar--' + this.placement.replace(/_/g, '-');
             }, this);
 
             this.message = ko.computed(function () {

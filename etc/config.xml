@@ -5,7 +5,7 @@
         <freeshippingbar>
             <general>
                 <enabled>0</enabled>
-                <placements>minicart,cart,checkout</placements>
+                <placements>minicart,cart,checkout,ajaxpro_popup</placements>
                 <basis>subtotal_with_discount</basis>
                 <include_tax>0</include_tax>
             </general>

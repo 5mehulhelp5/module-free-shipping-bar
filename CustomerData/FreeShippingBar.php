@@ -13,7 +13,11 @@ use Swissup\FreeShippingBar\Model\Config;
 use Swissup\FreeShippingBar\Model\Source\Placement;
 
 /**
- * Private customer data behind the minicart bar. Invalidated by etc/frontend/sections.xml.
+ * Private customer data behind the two KO-rendered bars — the header minicart and the Ajax Cart
+ * Pro popup. Both read this one section, so it reports which placements are enabled rather than
+ * a single flag; otherwise enabling one surface would silently light up the other.
+ *
+ * Invalidated by etc/frontend/sections.xml.
  */
 class FreeShippingBar implements SectionSourceInterface
 {
@@ -34,7 +38,15 @@ class FreeShippingBar implements SectionSourceInterface
         try {
             $storeId = $this->storeManager->getStore()->getId();
 
-            if (!$this->config->isPlacementEnabled(Placement::MINICART, $storeId)) {
+            $placements = [
+                Placement::MINICART => $this->config->isPlacementEnabled(Placement::MINICART, $storeId),
+                Placement::AJAXPRO_POPUP => $this->config->isPlacementEnabled(
+                    Placement::AJAXPRO_POPUP,
+                    $storeId
+                ),
+            ];
+
+            if (!in_array(true, $placements, true)) {
                 return ['show' => false];
             }
 
@@ -53,6 +65,6 @@ class FreeShippingBar implements SectionSourceInterface
             return ['show' => false];
         }
 
-        return ['show' => true] + $data->toArray();
+        return ['show' => true, 'placements' => $placements] + $data->toArray();
     }
 }

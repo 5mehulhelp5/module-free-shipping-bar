@@ -1,11 +1,11 @@
 <!--
 /**
- * Minicart free shipping bar.
+ * Free shipping bar — header minicart and Ajax Cart Pro popup.
  */
 -->
-<div class="fsbar fsbar--minicart"
+<div class="fsbar"
      if="isVisible()"
-     css="{'fsbar--qualified': isQualified()}"
+     css="modifierClass() + (isQualified() ? ' fsbar--qualified' : '')"
      attr="{'data-fsbar-source': bar().source}">
     <p class="fsbar__message" text="message()"></p>
     <div class="fsbar__track"

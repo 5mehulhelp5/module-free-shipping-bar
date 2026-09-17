@@ -11,6 +11,7 @@ class Placement implements OptionSourceInterface
     public const MINICART = 'minicart';
     public const CART = 'cart';
     public const CHECKOUT = 'checkout';
+    public const AJAXPRO_POPUP = 'ajaxpro_popup';
 
     /**
      * @return array<int, array<string, mixed>>
@@ -29,6 +30,10 @@ class Placement implements OptionSourceInterface
             [
                 'value' => self::CHECKOUT,
                 'label' => __('Checkout order summary'),
+            ],
+            [
+                'value' => self::AJAXPRO_POPUP,
+                'label' => __('Ajax Cart Pro "added to cart" popup'),
             ],
         ];
     }

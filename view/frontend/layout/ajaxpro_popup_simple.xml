@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="checkout.cart.container">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="swissup.freeshippingbar.ajaxpro.simple"
+                   before="-"
+                   template="Swissup_FreeShippingBar::bar.phtml"
+                   cacheable="false">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Swissup\FreeShippingBar\ViewModel\Bar</argument>
+                    <argument name="placement" xsi:type="string">ajaxpro_popup</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

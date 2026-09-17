@@ -85,6 +85,27 @@ still costs money.
 | Minicart | `free-shipping-bar` customer data section + a KO component in the `extraInfo` region |
 | Cart page | Server rendered block and ViewModel above the totals; the page reloads on qty change anyway |
 | Checkout summary | Threshold published into `window.checkoutConfig`, recomputed client side from quote totals so it follows coupon and shipping changes without a round trip |
+| Ajax Cart Pro popup | See below |
+
+### Ajax Cart Pro popup
+
+Ajax Cart Pro's "added to cart" popup does not reuse the header minicart — it builds its own
+component tree, and two of its four popup styles remove the container the cart page bar lives in.
+So the popup is a placement of its own, wired per style:
+
+| Popup style (`ajaxpro/main/cartHandle`) | Where the bar goes |
+| --- | --- |
+| Mini Cart | KO component in `ajaxpro_minicart_content`, `extraInfo` region |
+| SuggestPage Content | Server rendered into `checkout.cart.form.col1.top` |
+| Simple | Server rendered at the top of `checkout.cart.container`, since this style removes `cart.summary` |
+| Shopping Cart | Nothing extra — this style keeps `cart.summary`, so the **cart page** placement governs it |
+
+Both KO surfaces read the same customer data section, so the section reports which placements are
+enabled rather than a single flag — otherwise switching on the popup would silently light up the
+header minicart too.
+
+None of this is a hard dependency: the layout files only load under Ajax Cart Pro's own handles,
+so the module still works with Ajax Cart Pro absent.
 
 Nothing renders inside a cacheable block: minicart data is private customer data, and the cart and
 checkout pages are not cached.
